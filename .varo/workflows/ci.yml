@@ -1,0 +1,14 @@
+# Varo CI (GitHub Actions syntax). Kept under .varo/ so that GitHub does not
+# run it too.
+name: ci
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: golang:1.27.2-alpine
+    steps:
+      - name: git for the checkout
+        run: apk add --no-cache git
+      - uses: builtin:checkout
+      - name: Test
+        run: go vet ./... && go test ./...
