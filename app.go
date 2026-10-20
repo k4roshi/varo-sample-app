@@ -23,7 +23,7 @@ func NewHandler(version string) http.Handler {
 		_, _ = fmt.Fprintln(w, "ok")
 	})
 	mux.HandleFunc("GET /version", func(w http.ResponseWriter, _ *http.Request) {
-		http.Error(w, "broken", http.StatusInternalServerError)
+		_, _ = fmt.Fprintln(w, version)
 	})
 	mux.HandleFunc("GET /slow", func(w http.ResponseWriter, r *http.Request) {
 		ms, _ := strconv.Atoi(r.URL.Query().Get("ms"))
