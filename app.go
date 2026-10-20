@@ -9,7 +9,7 @@ import (
 
 // Greeting is the text of the home page.
 func Greeting(version string) string {
-	return fmt.Sprintf("Hi from varo-sample-app %s", version)
+	return fmt.Sprintf("Hello from varo-sample-app %s", version)
 }
 
 // NewHandler serves the app: / for people, /up for the health check,
@@ -23,7 +23,7 @@ func NewHandler(version string) http.Handler {
 		_, _ = fmt.Fprintln(w, "ok")
 	})
 	mux.HandleFunc("GET /version", func(w http.ResponseWriter, _ *http.Request) {
-		_, _ = fmt.Fprintln(w, version)
+		http.Error(w, "broken", http.StatusInternalServerError)
 	})
 	mux.HandleFunc("GET /slow", func(w http.ResponseWriter, r *http.Request) {
 		ms, _ := strconv.Atoi(r.URL.Query().Get("ms"))
