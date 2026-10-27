@@ -9,7 +9,7 @@ import (
 
 // Greeting is the text of the home page.
 func Greeting(version string) string {
-	return fmt.Sprintf("Hello from varo-sample-app %s", version)
+	return fmt.Sprintf("Hello from varo-sample-app, deployed by Varo %s", version)
 }
 
 // NewHandler serves the app: / for people, /up for the health check,

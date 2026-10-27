@@ -8,7 +8,7 @@ import (
 )
 
 func TestGreeting(t *testing.T) {
-	if got := Greeting("abc123"); got != "Hello from varo-sample-app abc123" {
+	if got := Greeting("abc123"); got != "Hello from varo-sample-app, deployed by Varo abc123" {
 		t.Fatalf("Greeting() = %q", got)
 	}
 }
