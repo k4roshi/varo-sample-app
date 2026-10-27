@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://varo.moku.io/schemas/varo-1.json
+version: 1
+
+services:
+  # The image's ENTRYPOINT: /app, listening on port 8080.
+  web:
+    role: web
+    port: 8080
+    health_check: /up
