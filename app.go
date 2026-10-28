@@ -17,8 +17,7 @@ func Greeting(version string) string {
 func NewHandler(version string) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /{$}", func(w http.ResponseWriter, _ *http.Request) {
-		// Broken on purpose: Varo must roll this release back on its own.
-		http.Error(w, "broken on purpose", http.StatusInternalServerError)
+		_, _ = fmt.Fprintln(w, Greeting(version))
 	})
 	mux.HandleFunc("GET /up", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = fmt.Fprintln(w, "ok")
