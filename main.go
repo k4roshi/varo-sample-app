@@ -25,6 +25,17 @@ func main() {
 		_ = server.Shutdown(shutdown)
 	}()
 
+	// Test: from crashAfter on, every start exits after two seconds, so Docker
+	// keeps restarting the container and ServiceRestarting must fire.
+	crashAfter := time.Date(2026, 11, 5, 14, 11, 0, 0, time.UTC)
+	go func() {
+		if wait := time.Until(crashAfter); wait > 0 {
+			time.Sleep(wait)
+		}
+		time.Sleep(2 * time.Second)
+		log.Fatal("crashing on purpose: restart-loop test")
+	}()
+
 	log.Printf("listening on %s, version %s", server.Addr, version)
 	if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
