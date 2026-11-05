@@ -25,13 +25,6 @@ func main() {
 		_ = server.Shutdown(shutdown)
 	}()
 
-	// Test: every start exits after 60 seconds, after the health check and the
-	// shift, so agent v0.26.0 must roll it back during its watch.
-	go func() {
-		time.Sleep(60 * time.Second)
-		log.Fatal("crashing on purpose: crash during the watch test")
-	}()
-
 	log.Printf("listening on %s, version %s", server.Addr, version)
 	if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
